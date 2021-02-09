@@ -1,6 +1,10 @@
 # graphql-sandbox
 
-### Notes
+### Order
+
+- server.js;
+- schema/schema.js; tells GraphQL what our data looks like
+-
 
 ### What is GraphQL?
 
@@ -20,8 +24,39 @@
 
 - Form a graph of our data and the relationships
 - Writing and executing a query in GraphQL
+- We need to explicitly inform GraphQL about how the data in the app is arranged and how to access it in a `schema file`.
 
-```query {
+### About This Tech Stack:
+
+- An express server (hooked up to a data store)
+- `GraphiQL` app: made for development, in broswer application to make test queries, similar to `Postman`
+- Run `npm i --save express express-graphql graphql lodash`
+- `touch server.js`
+
+#### Dependencies
+
+1. `express` handles incoming http requests and responds to users
+1. `express1-graphql` is a compatibility layer between express and graphql; package helps them play nicely
+1. `graphql` library
+1. `lodash`, a useful library with utility functions
+
+### Express server and GraphQL working together:
+
+- GraphQL is one part of this app. Express takes requests from the client then checks to see if that request is asking for GraphQL. If:yes, the request goes to GraphQL which sends a response to Express, which sends the response to the user. If:no, Express sends the response via Express per usual.
+- `app.use()` - Middleware are tiny functions made to intercept or modify requests as they come through an express server
+
+### Schema
+
+### Root Query
+
+- An entry point into our data
+- Allows us to jump into our graph of data,
+
+### GraphiQL App
+
+- Query:
+
+```{
       user(id: "23"){
           friends(){
               company(){
@@ -32,13 +67,17 @@
   }
 ```
 
-### About This Tech Stack:
+`or`
 
-- An express server (hooked up to a data store)
-- `GraphiQL` app: made for development, in broswer application to make test queries, similar to `Postman`
-- Run `npm i --save express express-graphql graphql lodash`
-
-1. `express` handles incoming http requests and responds to users
-1. `express1-graphql` is a compatibility layer between express and graphql; package helps them play nicely
-1. `graphql` library
-1. `lodash`, a useful library with utility functions
+```{
+      user(id: "23"){
+          friends(){
+              company(){
+                  name
+                  age
+                  id
+              }
+          }
+      }
+  }
+```
