@@ -100,4 +100,4 @@
 
 ### What Is the Schema?
 
-- Think of our schema/data as bunch of functions that return references to other objects in our Graph. Each edge/node on the graph is a resolve function. The data is all related via a resolve()
+- Think of our schema/data as bunch of functions that return references to other objects in our Graph. Each edge/node on the graph is a resolve function. The data is all related via a resolve()...
