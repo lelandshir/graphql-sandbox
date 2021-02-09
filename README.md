@@ -32,6 +32,13 @@
   }
 ```
 
-```
+### About This Tech Stack:
 
-```
+- An express server (hooked up to a data store)
+- `GraphiQL` app: made for development, in broswer application to make test queries, similar to `Postman`
+- Run `npm i --save express express-graphql graphql lodash`
+
+1. `express` handles incoming http requests and responds to users
+1. `express1-graphql` is a compatibility layer between express and graphql; package helps them play nicely
+1. `graphql` library
+1. `lodash`, a useful library with utility functions
