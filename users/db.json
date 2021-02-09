@@ -1,0 +1,33 @@
+{
+	"users": [
+		{ "id": "23", "firstName": "Léland", "age": 31, "companyId": "1" },
+		{ "id": "31", "firstName": "Sydney", "age": 23, "companyId": "2" },
+		{ "id": "31", "firstName": "Cherie", "age": 32, "companyId": "2" },
+		{ "id": "40", "firstName": "Ashton", "age": 27, "companyId": "4" },
+		{ "id": "41", "firstName": "Kaitlyn", "age": 29, "companyId": "3" },
+		{ "id": "23", "firstName": "Brendan", "age": 24, "companyId": "1" },
+		{ "id": "23", "firstName": "Matt", "age": 45, "companyId": "1" }
+	],
+	"companies": [
+		{
+			"id": "1",
+			"name": "General Assembly",
+			"description": "Web Development Bootcamp"
+		},
+		{
+			"id": "2",
+			"name": "Hillstone",
+			"description": "Restaurants/Hospitality"
+		},
+		{
+			"id": "3",
+			"name": "Hulu",
+			"description": "Television/Streaming"
+		},
+		{
+			"id": "4",
+			"name": "SAG",
+			"description": "Actor's Union"
+		}
+	]
+}

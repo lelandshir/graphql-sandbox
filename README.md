@@ -26,14 +26,13 @@
 - Writing and executing a query in GraphQL
 - We need to explicitly inform GraphQL about how the data in the app is arranged and how to access it in a `schema file`.
 
-### About This Tech Stack:
+### About The Tech:
 
 - An express server (hooked up to a data store)
 - `GraphiQL` app: made for development, in broswer application to make test queries, similar to `Postman`
 - Run `npm i --save express express-graphql graphql lodash`
-- `touch server.js`
 
-#### Dependencies
+#### Dependencies:
 
 1. `express` handles incoming http requests and responds to users
 1. `express1-graphql` is a compatibility layer between express and graphql; package helps them play nicely
@@ -81,3 +80,24 @@
       }
   }
 ```
+
+### GraphQL can serve as a Proxy of sorts
+
+- GQL server can make HTTP requests to another server with it's own DB, a 3rd party API, whatever - it can grab data and return it back with it's queries.
+
+#### JSON-Server for separate data
+
+- `npm i --save json-server`
+- Building small and fast little fake API's here
+- `https://github.com/typicode/json-server`
+- Note that the `companyId` key in db.json sets up a relationships between top levels of data.
+- Thus we can `/companies/1/users` to retrieve users who work at the company with an id of 1
+- This restful relation is being set up by `json-server` becaue of the id fields we set
+
+### Axios
+
+- `npm i --save axios`
+
+### What Is the Schema?
+
+- Think of our schema/data as bunch of functions that return references to other objects in our Graph. Each edge/node on the graph is a resolve function. The data is all related via a resolve()

@@ -12,7 +12,6 @@ const PORT = 8000;
 //middleware
 app.use(
 	"/graphql",
-
 	expressGraphQL({
 		//this is an options object
 		schema, //ES6: when key & val have same var name we can just pass the var name
