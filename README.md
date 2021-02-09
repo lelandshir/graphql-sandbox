@@ -96,6 +96,7 @@
 
 ### Axios
 
+- Use axios to make requests within our resolve functions
 - `npm i --save axios`
 
 ### What Is the Schema?
