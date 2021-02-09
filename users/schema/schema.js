@@ -2,7 +2,13 @@ const graphql = require("graphql");
 // const _ = require("lodash"); //helper library to go through static list of users
 const axios = require("axios");
 //bring in the different types of data we're using
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
+const {
+	GraphQLObjectType,
+	GraphQLString,
+	GraphQLInt,
+	GraphQLSchema,
+	GraphQLList,
+} = graphql;
 // Instruct GraphQL about what a User Obj looks like
 
 //static source of data
@@ -15,18 +21,26 @@ const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
 //Order of definition -> defined abover UserType
 const CompanyType = new GraphQLObjectType({
 	name: "Company",
-	fields: {
+	fields: () => ({
 		id: { type: GraphQLString },
 		name: { type: GraphQLString },
 		description: { type: GraphQLString },
-	},
+		users: {
+			//tell GraphQL to expect a list of users
+			type: new GraphQLList(UserType),
+			resolve: (parentValue, args) =>
+				axios
+					.get(`http://localhost:3000/companies/${parentValue.id}/users`)
+					.then((res) => res.data),
+		},
+	}),
 });
 
 const UserType = new GraphQLObjectType({
 	//required properties
 	name: "User", //must be capitalized
 	//fields obj tells GraphQL about the properties the user has
-	fields: {
+	fields: () => ({
 		id: { type: GraphQLString },
 		firstName: { type: GraphQLString },
 		age: { type: GraphQLInt },
@@ -39,10 +53,10 @@ const UserType = new GraphQLObjectType({
 					.get(`http://localhost:3000/companies/${parentValue.companyId}`)
 					.then((res) => res.data),
 		},
-	},
+	}),
 });
 
-// an entry into our data graph
+// RootQuery: an entry into our data graph, add sibling fields for diff entry points
 const RootQuery = new GraphQLObjectType({
 	name: "RootQueryType",
 	fields: {
@@ -60,6 +74,16 @@ const RootQuery = new GraphQLObjectType({
 					return res.data;
 				}),
 			//Gotcha: When Axios' promise resolves, by default it nests the data on the data property. GraphQL does not know that, so we play with the response
+		},
+		//company field -> sibling relationship to "user"
+		company: {
+			type: CompanyType,
+			args: { id: { type: GraphQLString } },
+			resolve: (parentValue, args) =>
+				axios.get(`http://localhost:3000/companies/${args.id}`).then((res) => {
+					console.log(res.data);
+					return res.data;
+				}),
 		},
 	},
 });

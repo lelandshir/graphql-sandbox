@@ -4,7 +4,6 @@
 
 - server.js;
 - schema/schema.js; tells GraphQL what our data looks like
--
 
 ### What is GraphQL?
 
@@ -102,3 +101,17 @@
 ### What Is the Schema?
 
 - Think of our schema/data as bunch of functions that return references to other objects in our Graph. Each edge/node on the graph is a resolve function. The data is all related via a resolve()...
+
+### Relationships
+
+- Thus far we have instructed a way for the rootquery to find Users and Companies. And Users can find companies. How do we make it so that Companies can return a list of users?
+
+### Common JavaScript Error
+
+- `ReferenceError: Cannot access 'UserType' before initialization`
+- Circular references create this issue.
+- We fix this with closures, wrap the fields object in an anonymous arrow function
+
+## Query Fragments
+
+-
